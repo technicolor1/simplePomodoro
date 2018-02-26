@@ -30,7 +30,6 @@ function stopClock() {
 }
 
 function resumeClock() {
-   //Update the deadline to preserve the amount of time remaining
    deadline = new Date(Date.parse(new Date()) + timeRemain);
 
    //Start the clock
@@ -68,7 +67,6 @@ function startTimer(deadline) {
       minuteSpan.innerHTML = ("0" + time.minutes).slice(-2);
       secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
 
-      //If timer reaches zero, stop the timer and reset the clock
       if (time.total < 0) {
          clearInterval(timeInterval);
          if (didBreak === false) {
