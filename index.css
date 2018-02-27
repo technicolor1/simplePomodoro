@@ -1,25 +1,40 @@
 .clockdiv {
    margin: 22% auto;
-   width: 380px;
+   width: 440px;
    user-select: none;
 }
 
 .colon {
-   animation: blinker 2.5s linear infinite;
+   animation: blinker 2.5s ease-in-out infinite;
+}
+
+.time {
+    animation: blinker 1.5s linear infinite;
 }
 
 @keyframes blinker {
    50% {
-      opacity: 0;
+        opacity: 0;
    }
 }
 
 h1 {
    text-align: center;
-   font-size: 50px;
+   font-size: 80px;
 }
 
 button {
    font-size: 50px;
    outline: none;
+   border: none;
+   background-color: transparent;
+   cursor: pointer;
+}
+
+button[name=break] {
+    color: #c1873b;
+}
+
+button[name=pause] {
+    transition: 100ms all ease;
 }

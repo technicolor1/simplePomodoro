@@ -31,7 +31,7 @@
         "callback-return": "error",
         "camelcase": "error",
         "capitalized-comments": [
-            "error",
+            "off",
             "always"
         ],
         "class-methods-use-this": "error",
@@ -254,7 +254,7 @@
         "space-infix-ops": "error",
         "space-unary-ops": "error",
         "spaced-comment": [
-            "error",
+            "off",
             "never"
         ],
         "strict": "error",

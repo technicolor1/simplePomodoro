@@ -1,74 +1,132 @@
-let breakTime = 1,
+let breakTime = 5,
     deadline = null,
     didBreak = false,
-    pomodoro = 1,
+    isPaused = false,
+    pomodoro = 25,
     timeInterval = null,
     timeRemain = null;
 
-const minuteSpan = document.querySelector(".minutes"),
-      pauseResume = document.querySelector("button[name=pause]"),
-      resume = document.querySelector("button[name=resume]"),
-      secondSpan = document.querySelector(".seconds");
+const colon = document.querySelector(".colon"),
+    minuteSpan = document.querySelector(".minutes"),
+    pause = document.querySelector("button[name=pause]"),
+    resume = document.querySelector("button[name=resume]"),
+    secondSpan = document.querySelector(".seconds");
 
+/*
+ *Window.onload = () => {
+ *startPomodoro();
+ *};
+ */
+
+document.querySelector("button[name=pomodoro]").addEventListener("click", () => {
+    clearInterval(timeInterval);
+    startPomodoro();
+});
+
+document.querySelector("button[name=break]").addEventListener("click", () => {
+    clearInterval(timeInterval);
+    startBreak();
+});
+
+pause.addEventListener("click", () => {
+    pauseClock();
+});
+
+resume.addEventListener("click", () => {
+    resumeClock();
+})
 
 function timeLeft(end) {
-   var total = Date.parse(end) - Date.parse(new Date());
-   var seconds = Math.floor((total / 1000) % 60);
-   var minutes = Math.floor((total / 1000 / 60) % 60);
+    var total = Date.parse(end) - Date.parse(new Date());
+    var seconds = Math.floor((total / 1000) % 60);
+    var minutes = Math.floor((total / 1000 / 60) % 60);
 
-   return {
-      "total": total,
-      "minutes": minutes,
-      "seconds": seconds
-   };
+    return {
+        "total": total,
+        "minutes": minutes,
+        "seconds": seconds
+    };
 }
 
 //Pause if timer is running
-function stopClock() {
-   clearInterval(timeInterval);
-   timeRemain = timeLeft(deadline).total;
+function pauseClock() {
+    if (!isPaused) {
+        isPaused = true;
+        colon.classList.toggle("colon");
+        secondSpan.classList.toggle("time");
+        minuteSpan.classList.toggle("time");
+        clearInterval(timeInterval);
+        timeRemain = timeLeft(deadline).total;
+    }
 }
 
 function resumeClock() {
-   //Update the deadline to preserve the amount of time remaining
+<<<<<<< HEAD
+<<<<<<< HEAD
+    if (isPaused === true) {
+        isPaused = false;
+        colon.classList.toggle("colon");
+        secondSpan.classList.toggle("time");
+        minuteSpan.classList.toggle("time");
+        deadline = new Date(Date.parse(new Date()) + timeRemain);
+        startTimer(deadline);
+    }
+=======
+=======
+>>>>>>> bba754901cd24a19e23ad720e1720a464635290a
    deadline = new Date(Date.parse(new Date()) + timeRemain);
 
    //Start the clock
    startTimer(deadline);
+>>>>>>> bba754901cd24a19e23ad720e1720a464635290a
 }
-
-pauseResume.addEventListener("click", () => {
-   stopClock();
-});
-
-resume.addEventListener("click", () => {
-   resumeClock();
-})
 
 
 function startPomodoro() {
-   minuteSpan.innerHTML = ("0" + pomodoro).slice(-2);
-   secondSpan.innerHTML = ("00");
-   deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
-   startTimer(deadline);
-   didBreak = false;
+    minuteSpan.innerHTML = (pomodoro);
+    secondSpan.innerHTML = ("00");
+    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
+    startTimer(deadline);
+    didBreak = false;
 }
 
 function startBreak() {
-   minuteSpan.innerHTML = ("0" + breakTime).slice(-2);
-   secondSpan.innerHTML = ("00");
-   deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
-   startTimer(deadline);
-   didBreak = true;
+    minuteSpan.innerHTML = (breakTime);
+    secondSpan.innerHTML = ("00");
+    deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
+    startTimer(deadline);
+    didBreak = true;
 }
 
 function startTimer(deadline) {
+<<<<<<< HEAD
+    function updateClock() {
+        const time = timeLeft(deadline);
+        minuteSpan.innerHTML = (time.minutes);
+        secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
+
+        if (time.total < 0) {
+            clearInterval(timeInterval);
+            if (didBreak === false) {
+                startBreak();
+            } else if (didBreak === true) {
+                startPomodoro();
+            }
+        }
+    }
+
+    /*
+     * avoid delay
+     * makes clock accurate to millisecond when pause/resume
+     */
+    updateClock();
+    timeInterval = setInterval(updateClock, 1000);
+=======
    timeInterval = setInterval(() => {
       const time = timeLeft(deadline);
       minuteSpan.innerHTML = ("0" + time.minutes).slice(-2);
       secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
 
-      //If timer reaches zero, stop the timer and reset the clock
       if (time.total < 0) {
          clearInterval(timeInterval);
          if (didBreak === false) {
@@ -78,20 +136,5 @@ function startTimer(deadline) {
          }
       }
    }, 1000);
+>>>>>>> bba754901cd24a19e23ad720e1720a464635290a
 }
-
-/*
- *Window.onload = () => {
- *startPomodoro();
- *};
- */
-
-document.querySelector("button[name=pomodoro]").addEventListener("click", () => {
-   clearInterval(timeInterval);
-   startPomodoro();
-});
-
-document.querySelector("button[name=break]").addEventListener("click", () => {
-   clearInterval(timeInterval);
-   startBreak();
-});
