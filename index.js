@@ -63,6 +63,7 @@ function pauseClock() {
 function resumeClock() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (isPaused === true) {
         isPaused = false;
         colon.classList.toggle("colon");
@@ -72,6 +73,8 @@ function resumeClock() {
         startTimer(deadline);
     }
 =======
+=======
+>>>>>>> bba754901cd24a19e23ad720e1720a464635290a
 =======
 >>>>>>> bba754901cd24a19e23ad720e1720a464635290a
    deadline = new Date(Date.parse(new Date()) + timeRemain);
