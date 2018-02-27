@@ -61,9 +61,6 @@ function pauseClock() {
 }
 
 function resumeClock() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     if (isPaused === true) {
         isPaused = false;
         colon.classList.toggle("colon");
@@ -72,16 +69,6 @@ function resumeClock() {
         deadline = new Date(Date.parse(new Date()) + timeRemain);
         startTimer(deadline);
     }
-=======
-=======
->>>>>>> bba754901cd24a19e23ad720e1720a464635290a
-=======
->>>>>>> bba754901cd24a19e23ad720e1720a464635290a
-   deadline = new Date(Date.parse(new Date()) + timeRemain);
-
-   //Start the clock
-   startTimer(deadline);
->>>>>>> bba754901cd24a19e23ad720e1720a464635290a
 }
 
 
@@ -102,7 +89,6 @@ function startBreak() {
 }
 
 function startTimer(deadline) {
-<<<<<<< HEAD
     function updateClock() {
         const time = timeLeft(deadline);
         minuteSpan.innerHTML = (time.minutes);
@@ -124,20 +110,4 @@ function startTimer(deadline) {
      */
     updateClock();
     timeInterval = setInterval(updateClock, 1000);
-=======
-   timeInterval = setInterval(() => {
-      const time = timeLeft(deadline);
-      minuteSpan.innerHTML = ("0" + time.minutes).slice(-2);
-      secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
-
-      if (time.total < 0) {
-         clearInterval(timeInterval);
-         if (didBreak === false) {
-            startBreak();
-         } else if (didBreak === true) {
-            startPomodoro();
-         }
-      }
-   }, 1000);
->>>>>>> bba754901cd24a19e23ad720e1720a464635290a
 }
