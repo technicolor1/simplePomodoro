@@ -7,18 +7,34 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="index.css">
    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
 </head>
 
 <body>
+   <div class="change-pomodoro">
+      <label for="set-pomodoro">Session</label><br>
+      <input type="text" name="set-pomodoro" value=""></input>
+   </div>
    <div class="clockdiv">
       <h1>
-          <span class="minutes"></span> <span class="colon">:</span> <span class="seconds"></span><br>
-      </h1>
-
-      <button type="button" name="pomodoro">Pomodoro</button>
-      <button type="button" name="break"><i class="fas fa-coffee"></i></button>
-      <button type="button" name="pause"><i class="fas fa-pause"></i></button>
-      <button type="button" name="resume"><i class="fas fa-play"></i></button> 
+            <span class="minutes">25</span>
+            <span class="colon">:</span>
+            <span class="seconds">00</span>
+            <br>
+        </h1>
+   </div>
+   <div class="controllers">
+      <button title="pomodoro" type="button" name="pomodoro">🍅</button>
+      <button title="take a break..." type="button" name="break">
+            <i class="fas fa-coffee"></i>
+        </button>
+      <button title="pause / resume" type="button" name="playresume">
+            <i class="fas fa-pause"></i>
+        </button>
+   </div>
+   <div class="change-break">
+      <label for="set-break">Break</label><br>
+      <input type="text" name="set-break" value=""></input>
    </div>
 
    <script type="text/javascript" src="index.js">
