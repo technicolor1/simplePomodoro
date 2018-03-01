@@ -11,18 +11,30 @@
 </head>
 
 <body>
-   <div class="change-pomodoro">
-      <label for="set-pomodoro">Session</label><br>
-      <input type="text" name="set-pomodoro" value=""></input>
-   </div>
-   <div class="clockdiv">
-      <h1>
+   <div class="main">
+      <div id="session">
+         <button type="button" name="raise-pomodoro"><i class="fas fa-arrow-up"></i></button>
+         <h2>25</h2>
+         <button type="button" name="lower-pomodoro"><i class="fas fa-arrow-down"></i></button>
+      </div>
+
+      <div class="clockdiv">
+         <h1>
             <span class="minutes">25</span>
             <span class="colon">:</span>
             <span class="seconds">00</span>
             <br>
-        </h1>
+         </h1>
+      </div>
+
+      <div id="break">
+         <button type="button" name="raise-break"><i class="fas fa-arrow-up"></i></button>
+         <h2>5</h2>
+         <button type="button" name="lower-break"><i class="fas fa-arrow-down"></i></button>
+      </div>
+
    </div>
+
    <div class="controllers">
       <button title="pomodoro" type="button" name="pomodoro">🍅</button>
       <button title="take a break..." type="button" name="break">
@@ -32,13 +44,8 @@
             <i class="fas fa-pause"></i>
         </button>
    </div>
-   <div class="change-break">
-      <label for="set-break">Break</label><br>
-      <input type="text" name="set-break" value=""></input>
-   </div>
 
-   <script type="text/javascript" src="index.js">
-   </script>
+   <script type="text/javascript" src="index.js"></script>
 </body>
 
 </html>
