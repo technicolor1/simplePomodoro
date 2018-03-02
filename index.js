@@ -1,8 +1,10 @@
-let breakTime = 5,
+let breakTime = null,
+   breakTimeSet = document.querySelector("#break-set"),
    deadline = null,
    didBreak = false,
    isPaused = false,
-   pomodoro = 25,
+   pomodoro = null,
+   sessionTimeSet = document.querySelector("#pomodoro-set"),
    timeInterval = null,
    timeRemain = null;
 
@@ -26,6 +28,24 @@ document.querySelector("button[name=break]").addEventListener("click", () => {
    clearInterval(timeInterval);
    startBreak();
 });
+
+document.querySelector("button[name=raise-pomodoro").addEventListener("click", () => {
+   sessionTimeSet.innerText = parseInt(sessionTimeSet.innerText, 10) + 1;
+   minuteSpan.innerText = sessionTimeSet.innerText;
+})
+
+document.querySelector("button[name=lower-pomodoro").addEventListener("click", () => {
+   sessionTimeSet.innerText = parseInt(sessionTimeSet.innerText, 10) - 1;
+   minuteSpan.innerText = sessionTimeSet.innerText;
+})
+
+document.querySelector("button[name=raise-break").addEventListener("click", () => {
+   breakTimeSet.innerText = parseInt(breakTimeSet.innerText, 10) + 1;
+})
+
+document.querySelector("button[name=lower-break").addEventListener("click", () => {
+   breakTimeSet.innerText = parseInt(breakTimeSet.innerText, 10) - 1;
+})
 
 function timeLeft(end) {
    var total = Date.parse(end) - Date.parse(new Date());
@@ -66,6 +86,7 @@ playpause.addEventListener("click", () => {
 
 function startPomodoro() {
    colon.classList.add("colon");
+   pomodoro = sessionTimeSet.innerText;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
@@ -75,6 +96,7 @@ function startPomodoro() {
 
 function startBreak() {
    colon.classList.add("colon");
+   breakTime = breakTimeSet.innerText;
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
