@@ -1,52 +1,25 @@
-"use strict";
+'use strict';
 
 let breakTime = null,
-   breakTimeSet = document.querySelector("input[name=set-break]"),
    deadline = null,
    didBreak = false,
    isPaused = false,
    pomodoro = null,
-   sessionTimeSet = document.querySelector("input[name=set-pomodoro]"),
    timeInterval = null,
-   timeRemain = null;
+   timeRemain = null,
+   breakTimeSet = document.querySelector("input[name=break-set]"),
+   sessionTimeSet = document.querySelector("input[name=pomodoro-set]");
 
-const colon = document.querySelector(".colon"),
+const coffee = document.querySelector("button[name=break]"),
+   colon = document.querySelector(".colon"),
    minuteSpan = document.querySelector(".minutes"),
    secondSpan = document.querySelector(".seconds");
 
-// on window load
+
 window.onload = () => {
    colon.classList.remove("colon");
-   sessionTimeSet.value = 25;
-   breakTimeSet.value = 5;
+
 };
-
-function listener() {
-   window.requestAnimationFrame(() => {
-      document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
-      document.querySelector("#break-value").innerHTML = breakTimeSet.value;
-      minuteSpan.innerText = sessionTimeSet.value;
-   });
-}
-// listen for changes from session slider
-// FIXME: doesn't work for touch
-sessionTimeSet.addEventListener("mousedown", () => {
-   listener();
-   sessionTimeSet.addEventListener("mousemove", listener);
-});
-sessionTimeSet.addEventListener("mouseup", () => {
-   sessionTimeSet.removeEventListener("mousemove", listener);
-});
-
-// listen for changes from break slider
-// FIXME: doesn't work for touch
-breakTimeSet.addEventListener("mousedown", () => {
-   listener();
-   breakTimeSet.addEventListener("mousemove", listener);
-});
-breakTimeSet.addEventListener("mouseup", () => {
-   breakTimeSet.removeEventListener("mousemove", listener);
-});
 
 document.querySelector("button[name=pomodoro]").addEventListener("click", () => {
    clearInterval(timeInterval);
@@ -57,6 +30,10 @@ document.querySelector("button[name=break]").addEventListener("click", () => {
    clearInterval(timeInterval);
    startBreak();
 });
+
+sessionTimeSet.addEventListener("input", () => {
+   minuteSpan.innerText = sessionTimeSet.value;
+})
 
 function timeLeft(end) {
    var total = Date.parse(end) - Date.parse(new Date());
@@ -82,7 +59,7 @@ playpause.addEventListener("click", () => {
       clearInterval(timeInterval);
       timeRemain = timeLeft(deadline).total;
       playpause.innerHTML = "<i class='fas fa-play'></i>";
-      //resume
+   //resume
    } else if (isPaused === true) {
       isPaused = false;
       colon.classList.toggle("colon");
@@ -97,7 +74,7 @@ playpause.addEventListener("click", () => {
 
 function startPomodoro() {
    colon.classList.add("colon");
-   pomodoro = sessionTimeSet.value;
+   pomodoro = sessionTimeSet.innerText;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
@@ -107,7 +84,7 @@ function startPomodoro() {
 
 function startBreak() {
    colon.classList.add("colon");
-   breakTime = breakTimeSet.value;
+   breakTime = breakTimeSet.innerText;
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
