@@ -4,12 +4,9 @@
 }
 
 html, body, main {
-<<<<<<< HEAD
    -webkit-user-select: none;
    -moz-user-select: none;
    -ms-user-select: none;
-=======
->>>>>>> 1399b817fc018240b9aec7a027d988fcff6c673f
    user-select: none;
    height: 100%;
 }
@@ -25,30 +22,22 @@ html, body, main {
 }
 
 #session {
-<<<<<<< HEAD
    display: -webkit-box;
    display: -ms-flexbox;
    display: flex;
    -webkit-box-orient: vertical;
    -webkit-box-direction: normal;
    -ms-flex-direction: column;
-=======
-   display: flex;
->>>>>>> 1399b817fc018240b9aec7a027d988fcff6c673f
    flex-direction: column;
 }
 
 #break {
-<<<<<<< HEAD
    display: -webkit-box;
    display: -ms-flexbox;
    display: flex;
    -webkit-box-orient: vertical;
    -webkit-box-direction: normal;
    -ms-flex-direction: column;
-=======
-   display: flex;
->>>>>>> 1399b817fc018240b9aec7a027d988fcff6c673f
    flex-direction: column;
 }
 
@@ -79,11 +68,7 @@ html, body, main {
 }
 
 button[name=playresume] {
-<<<<<<< HEAD
    margin-right: 40px;
-=======
-   margin-right: 34px;
->>>>>>> 1399b817fc018240b9aec7a027d988fcff6c673f
 }
 
 .colon {
@@ -193,14 +178,10 @@ input[type=range]::-webkit-slider-thumb {
    background: #ffffff;
    cursor: pointer;
    margin-top: -14px;
-<<<<<<< HEAD
    -webkit-box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+           box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
    -webkit-transition: all 0.2s ease-in-out;
    -o-transition: all 0.2s ease-in-out;
-=======
-   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
->>>>>>> 1399b817fc018240b9aec7a027d988fcff6c673f
    transition: all 0.2s ease-in-out;
 }
 
@@ -234,10 +215,7 @@ input[type=range]::-webkit-slider-runnable-track {
    width: 100%;
    height: 8.4px;
    cursor: pointer;
-<<<<<<< HEAD
    -webkit-box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-=======
->>>>>>> 1399b817fc018240b9aec7a027d988fcff6c673f
    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
    background: #30a1a9;
    border-radius: 1.3px;
