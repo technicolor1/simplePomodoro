@@ -1,6 +1,6 @@
 :root {
-  --tomato-color: #ff6347;
-  --some-margin: 50px;
+   --tomato-color: #ff6347;
+   --some-margin: 50px;
 }
 
 * {
@@ -196,14 +196,23 @@ input[type=range]::-webkit-slider-thumb {
    height: 36px;
    width: 16px;
    border-radius: 100px;
-   background: #ffffff;
-   cursor: pointer;
+   background: white;
+   cursor: move;
+   cursor: grab;
+   cursor: -moz-grab;
+   cursor: -webkit-grab;
    margin-top: -14px;
    -webkit-box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-           box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
    -webkit-transition: all 0.2s ease-in-out;
    -o-transition: all 0.2s ease-in-out;
    transition: all 0.2s ease-in-out;
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+   cursor: grabbing;
+   cursor: -moz-grabbing;
+   cursor: -webkit-grabbing;
 }
 
 input[type=range]::-webkit-slider-thumb:hover {
@@ -218,7 +227,7 @@ input[type=range]::-moz-range-thumb {
    height: 36px;
    width: 16px;
    border-radius: 3px;
-   background: #ffffff;
+   background: white;
    cursor: pointer;
 }
 
@@ -228,8 +237,7 @@ input[type=range]::-ms-thumb {
    height: 36px;
    width: 16px;
    border-radius: 3px;
-   background: #ffffff;
-   cursor: pointer;
+   background: white;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
