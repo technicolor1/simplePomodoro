@@ -1,24 +1,28 @@
 "use strict";
 
 let breakTime = null,
-   breakTimeSet = document.querySelector("input[name=set-break]"),
-   deadline = null,
-   didBreak = false,
-   isPaused = false,
-   pomodoro = null,
-   sessionTimeSet = document.querySelector("input[name=set-pomodoro]"),
-   timeInterval = null,
-   timeRemain = null;
+    deadline = null,
+    didBreak = false,
+    isPaused = false,
+    pomodoro = null,
+    timeInterval = null,
+    timeRemain = null;
+
+let breakTimeSet = document.querySelector("input[name=set-break]"),
+    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
 const colon = document.querySelector(".colon"),
-   minuteSpan = document.querySelector(".minutes"),
-   secondSpan = document.querySelector(".seconds");
+      minuteSpan = document.querySelector(".minutes"),
+      playpause = document.querySelector("button[name=playresume]"),
+      secondSpan = document.querySelector(".seconds");
 
 // on window load
 window.onload = () => {
    colon.classList.remove("colon");
    sessionTimeSet.value = 25;
    breakTimeSet.value = 5;
+   // playpause.classList.toggle("hide");
+   // document.querySelector("button[name=break]").classList.add("hide");
 };
 
 function listener() {
@@ -71,7 +75,6 @@ function timeLeft(end) {
 }
 
 //pausing and resuming
-const playpause = document.querySelector("button[name=playresume]");
 playpause.addEventListener("click", () => {
    //pause
    if (isPaused === false) {
@@ -97,6 +100,7 @@ playpause.addEventListener("click", () => {
 
 function startPomodoro() {
    colon.classList.add("colon");
+   playpause.classList.remove("hide");
    pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
@@ -107,6 +111,7 @@ function startPomodoro() {
 
 function startBreak() {
    colon.classList.add("colon");
+   playpause.classList.remove("hide");
    breakTime = breakTimeSet.value;
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");

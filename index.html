@@ -13,6 +13,11 @@
 </head>
 
 <body>
+   <div class="reset-control">
+      <button title="reset" type="button" name="reset">
+            <i class="fas fa-sync-alt"></i>
+      </button>
+   </div>
    <div class="main">
       <div id="session">
             <input title="session time" type="range" min="1" max="60" step="1" name="set-pomodoro"></input>
@@ -30,19 +35,19 @@
 
       <div id="break">
             <input title="break time" type="range" min="1" max="30" step="1" name="set-break"></input>
-            <h2>Break &nbsp;<span id="break-value">5</span></h2>            
+            <h2>Break &nbsp;<span id="break-value">5</span></h2>
       </div>
 
    </div>
 
    <div class="controllers">
-      <button title="pomodoro" type="button" name="pomodoro">🍅</button>
+      <button title="pomodoro" type="button" name="pomodoro"><i class="fas fa-clock"></i></button>
       <button title="take a break..." type="button" name="break">
             <i class="fas fa-coffee"></i>
-        </button>
+      </button>
       <button title="pause / resume" type="button" name="playresume">
             <i class="fas fa-pause"></i>
-        </button>
+      </button>
    </div>
    <script type="text/javascript" src="index.js"></script>
 </body>
