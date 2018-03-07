@@ -1,5 +1,13 @@
 "use strict";
 
+const breakSetter = document.querySelector("#break"),
+      colon = document.querySelector(".colon"),
+      minuteSpan = document.querySelector(".minutes"),
+      playpause = document.querySelector("button[name=playresume]"),
+      resetBtn = document.querySelector("button[name=reset]"),
+      secondSpan = document.querySelector(".seconds"),
+      sessionSetter = document.querySelector("#session");
+
 let breakTime = null,
     deadline = null,
     didBreak = false,
@@ -10,15 +18,6 @@ let breakTime = null,
 
 let breakTimeSet = document.querySelector("input[name=set-break]"),
     sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
-
-const coffee = document.querySelector("button[name=break]"),
-      colon = document.querySelector(".colon"),
-      minuteSpan = document.querySelector(".minutes"),
-      playpause = document.querySelector("button[name=playresume]"),
-      secondSpan = document.querySelector(".seconds"),
-      sessionSetter = document.querySelector("#session"),
-      breakSetter = document.querySelector("#break"),
-      resetBtn = document.querySelector("button[name=reset]");
 
 // on window load
 window.onload = () => {
