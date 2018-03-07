@@ -120,8 +120,11 @@ playpause.addEventListener("click", () => {
 
 function startPomodoro() {
    colon.classList.add("colon");
+   sessionSetter.classList.remove("fadeIn-session");
+   breakSetter.classList.remove("fadeIn-break");
    sessionSetter.classList.add("fadeOut-session");
    breakSetter.classList.add("fadeOut-break");
+
    pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
