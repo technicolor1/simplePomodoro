@@ -11,18 +11,20 @@ let breakTime = null,
 let breakTimeSet = document.querySelector("input[name=set-break]"),
     sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
-const colon = document.querySelector(".colon"),
+const coffee = document.querySelector("button[name=break]"),
+      colon = document.querySelector(".colon"),
       minuteSpan = document.querySelector(".minutes"),
       playpause = document.querySelector("button[name=playresume]"),
-      secondSpan = document.querySelector(".seconds");
+      secondSpan = document.querySelector(".seconds"),
+      sessionSetter = document.querySelector("#session"),
+      breakSetter = document.querySelector("#break"),
+      resetBtn = document.querySelector("button[name=reset]");
 
 // on window load
 window.onload = () => {
    colon.classList.remove("colon");
    sessionTimeSet.value = 25;
    breakTimeSet.value = 5;
-   // playpause.classList.toggle("hide");
-   // document.querySelector("button[name=break]").classList.add("hide");
 };
 
 function listener() {
@@ -57,10 +59,28 @@ document.querySelector("button[name=pomodoro]").addEventListener("click", () => 
    startPomodoro();
 });
 
-document.querySelector("button[name=break]").addEventListener("click", () => {
+resetBtn.addEventListener("click", () => {
+   resetSession();
+})
+
+function resetSession() {
+   colon.classList.remove("colon");
+   minuteSpan.classList.remove("time");
+   secondSpan.classList.remove("time");
    clearInterval(timeInterval);
-   startBreak();
-});
+   sessionSetter.value = pomodoro;
+   breakSetter.value = breakTime;
+   isPaused = false;
+   playpause.innerHTML = "<i class='fas fa-pause'></i>";
+   minuteSpan.innerHTML = sessionSetter.value;
+   secondSpan.innerHTML = "00";
+
+   sessionSetter.classList.remove("fadeOut-session");
+   sessionSetter.classList.add("fadeIn-session");
+
+   breakSetter.classList.remove("fadeOut-break");
+   breakSetter.classList.add("fadeIn-break");
+}
 
 function timeLeft(end) {
    var total = Date.parse(end) - Date.parse(new Date());
@@ -100,7 +120,8 @@ playpause.addEventListener("click", () => {
 
 function startPomodoro() {
    colon.classList.add("colon");
-   playpause.classList.remove("hide");
+   sessionSetter.classList.add("fadeOut-session");
+   breakSetter.classList.add("fadeOut-break");
    pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");

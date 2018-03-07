@@ -17,6 +17,7 @@ html, body, main {
 }
 
 .reset-control {
+   margin-bottom: -3%;
    display: flex;
    padding-top: 15%;
    justify-content: center;
@@ -161,6 +162,38 @@ button[name=pomodoro] {
 
 .hide {
    display: none;
+}
+
+/* fade-in and fade-out for session slider */
+
+.fadeOut-session {
+   transform: translate(-100%);
+   visibility: hidden;
+   opacity: 0;
+   transition: visibility 0s linear 0.5s, opacity 0.5s, transform 0.3s;
+}
+
+.fadeIn-session {
+   transform: translate(0%);
+   visibility: visible;
+   opacity: 1;
+   transition: visibility 0s linear 0s, opacity 0.5s, transform 0.3s;
+}
+
+/* fade-in and fade-out for break slider */
+
+.fadeOut-break {
+   transform: translate(100%);
+   visibility: hidden;
+   opacity: 0;
+   transition: visibility 0s linear 0.5s, opacity 0.5s, transform 0.3s;
+}
+
+.fadeIn-break {
+   transform: translate(0%);
+   visibility: visible;
+   opacity: 1;
+   transition: visibility 0s linear 0s, opacity 0.5s, transform 0.3s;
 }
 
 /* following 3 blocks hide the default range slider style */
