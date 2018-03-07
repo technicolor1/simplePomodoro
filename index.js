@@ -134,8 +134,6 @@ function startPomodoro() {
 }
 
 function startBreak() {
-   colon.classList.add("colon");
-   playpause.classList.remove("hide");
    breakTime = breakTimeSet.value;
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");
