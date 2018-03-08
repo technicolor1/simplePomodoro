@@ -199,7 +199,7 @@ button[name=pomodoro] {
 /* following 3 blocks hide the default range slider style */
 
 input[type=range] {
-   padding-top: 50%;
+   margin-top: 50%;
    -webkit-appearance: none;
    width: 250px;
    background: transparent;
