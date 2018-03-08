@@ -232,6 +232,9 @@ input[type=range]::-webkit-slider-thumb {
    -webkit-transition: all 0.2s ease-in-out;
    -o-transition: all 0.2s ease-in-out;
    transition: all 0.2s ease-in-out;
+   -webkit-transform: scale(1.9);
+   -ms-transform: scale(1.9);
+   transform: scale(1.9);
 }
 
 input[type=range]::-webkit-slider-thumb:active {
@@ -241,9 +244,6 @@ input[type=range]::-webkit-slider-thumb:active {
 }
 
 input[type=range]::-webkit-slider-thumb:hover {
-   -webkit-transform: scale(1.9);
-   -ms-transform: scale(1.9);
-   transform: scale(1.9);
 }
 
 input[type=range]::-moz-range-thumb {

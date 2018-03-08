@@ -49,6 +49,15 @@ setterArr.forEach((setter) => {
    setter.addEventListener("touchend", () => {
       setter.removeEventListener("touchmove", listener);
    })
+
+   setter.addEventListener("mousedown", () => {
+      listener();
+      setter.addEventListener("mousemove", listener);
+   });
+
+   setter.addEventListener("mouseup", () => {
+      setter.removeEventListener("mousemove", listener);
+   })
 })
 
 document.querySelector("button[name=pomodoro]").addEventListener("click", () => {
@@ -83,11 +92,13 @@ function timeLeft(end) {
    var total = Date.parse(end) - Date.parse(new Date());
    var seconds = Math.floor((total / 1000) % 60);
    var minutes = Math.floor((total / 1000 / 60) % 60);
+   var hours = Math.floor((total / 1000 / 60 / 60) % 60);
 
    return {
       "total": total,
       "minutes": minutes,
-      "seconds": seconds
+      "seconds": seconds,
+      "hours": hours
    };
 }
 
@@ -143,6 +154,9 @@ function startTimer(deadline) {
    function updateClock() {
       const time = timeLeft(deadline);
       minuteSpan.innerHTML = (time.minutes);
+      if (time.hours === 1) {
+         minuteSpan.innerHTML = "60";
+      }
       secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
 
       if (time.total < 0) {
