@@ -26,7 +26,8 @@ window.onload = () => {
    breakTimeSet.value = 5;
 };
 
-function listener() {
+function listener(ev) {
+   console.log(ev);
    window.requestAnimationFrame(() => {
       document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
       document.querySelector("#break-value").innerHTML = breakTimeSet.value;
@@ -34,27 +35,21 @@ function listener() {
    });
 }
 
-//listen for touch input
-new Hammer(sessionTimeSet).on("panleft panright tap", listener);
-new Hammer(breakTimeSet).on("panleft panright tap", listener);
-
-// listen for changes from session slider
-sessionTimeSet.addEventListener("mousedown", () => {
+const setterArr = [
+                  breakTimeSet,
+                  sessionTimeSet
+                  ];
+setterArr.forEach((setter) => {
    listener();
-   sessionTimeSet.addEventListener("mousemove", listener);
-});
-sessionTimeSet.addEventListener("mouseup", () => {
-   sessionTimeSet.removeEventListener("mousemove", listener);
-});
+   setter.addEventListener("touchstart", () => {
+      listener();
+      setter.addEventListener("touchmove", listener);
+   });
 
-// listen for changes from break slider
-breakTimeSet.addEventListener("mousedown", () => {
-   listener();
-   breakTimeSet.addEventListener("mousemove", listener);
-});
-breakTimeSet.addEventListener("mouseup", () => {
-   breakTimeSet.removeEventListener("mousemove", listener);
-});
+   setter.addEventListener("touchend", () => {
+      setter.removeEventListener("touchmove", listener);
+   })
+})
 
 document.querySelector("button[name=pomodoro]").addEventListener("click", () => {
    clearInterval(timeInterval);
