@@ -1,23 +1,23 @@
 "use strict";
 
 const breakSetter = document.querySelector("#break"),
-      colon = document.querySelector(".colon"),
-      minuteSpan = document.querySelector(".minutes"),
-      playpause = document.querySelector("button[name=playresume]"),
-      resetBtn = document.querySelector("button[name=reset]"),
-      secondSpan = document.querySelector(".seconds"),
-      sessionSetter = document.querySelector("#session");
+   colon = document.querySelector(".colon"),
+   minuteSpan = document.querySelector(".minutes"),
+   playpause = document.querySelector("button[name=playresume]"),
+   resetBtn = document.querySelector("button[name=reset]"),
+   secondSpan = document.querySelector(".seconds"),
+   sessionSetter = document.querySelector("#session");
 
 let breakTime = null,
-    deadline = null,
-    didBreak = false,
-    isPaused = false,
-    pomodoro = null,
-    timeInterval = null,
-    timeRemain = null;
+   deadline = null,
+   didBreak = false,
+   isPaused = false,
+   pomodoro = null,
+   timeInterval = null,
+   timeRemain = null;
 
 let breakTimeSet = document.querySelector("input[name=set-break]"),
-    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
+   sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
 // on window load
 window.onload = () => {
@@ -33,8 +33,12 @@ function listener() {
       minuteSpan.innerText = sessionTimeSet.value;
    });
 }
+
+//listen for touch input
+new Hammer(sessionTimeSet).on("panleft panright tap", listener);
+new Hammer(breakTimeSet).on("panleft panright tap", listener);
+
 // listen for changes from session slider
-// FIXME: doesn't work for touch
 sessionTimeSet.addEventListener("mousedown", () => {
    listener();
    sessionTimeSet.addEventListener("mousemove", listener);
@@ -44,7 +48,6 @@ sessionTimeSet.addEventListener("mouseup", () => {
 });
 
 // listen for changes from break slider
-// FIXME: doesn't work for touch
 breakTimeSet.addEventListener("mousedown", () => {
    listener();
    breakTimeSet.addEventListener("mousemove", listener);
