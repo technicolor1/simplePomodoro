@@ -27,7 +27,6 @@ window.onload = () => {
 };
 
 function listener(ev) {
-   console.log(ev);
    window.requestAnimationFrame(() => {
       document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
       document.querySelector("#break-value").innerHTML = breakTimeSet.value;

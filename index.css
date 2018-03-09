@@ -115,7 +115,7 @@ h1 {
 }
 
 h2 {
-   padding-top: 25%;
+   padding-top: 70%;
    text-align: center;
    font-size: 30px;
 }
@@ -195,6 +195,7 @@ input[type=range] {
    -webkit-appearance: none;
    width: 250px;
    background: transparent;
+   transform: rotate(270deg);
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -218,9 +219,9 @@ input[type=range]::-ms-track {
 input[type=range]::-webkit-slider-thumb {
    -webkit-appearance: none;
    border: 2px solid #000000;
-   height: 36px;
-   width: 16px;
-   border-radius: 100px;
+   height: 2.1rem;
+   width: 2.1rem;
+   border-radius: 50%;
    background: white;
    cursor: move;
    cursor: grab;
@@ -232,18 +233,15 @@ input[type=range]::-webkit-slider-thumb {
    -webkit-transition: all 0.2s ease-in-out;
    -o-transition: all 0.2s ease-in-out;
    transition: all 0.2s ease-in-out;
-   -webkit-transform: scale(1.9);
-   -ms-transform: scale(1.9);
-   transform: scale(1.9);
+   -webkit-transform: scale(1.5);
+   -ms-transform: scale(1.5);
+   transform: scale(1.5);
 }
 
 input[type=range]::-webkit-slider-thumb:active {
    cursor: grabbing;
    cursor: -moz-grabbing;
    cursor: -webkit-grabbing;
-}
-
-input[type=range]::-webkit-slider-thumb:hover {
 }
 
 input[type=range]::-moz-range-thumb {
