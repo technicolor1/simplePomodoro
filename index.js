@@ -22,9 +22,10 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
 // on window load
 window.onload = () => {
    colon.classList.remove("colon");
-   sessionTimeSet.value = 25;
-   breakTimeSet.value = 5;
 };
+
+sessionTimeSet.value = 25;
+breakTimeSet.value = 5;
 
 function listener(ev) {
    window.requestAnimationFrame(() => {

@@ -12,15 +12,14 @@ html, body, main {
    -moz-user-select: none;
    -ms-user-select: none;
    user-select: none;
-   height: 100%;
 }
 
 .reset-control {
-   margin-bottom: -3%;
    display: flex;
-   padding-top: 15%;
    justify-content: center;
    align-items: center;
+   width: 10%;
+   margin: 15% 45% -5% 45%;
 }
 
 .main {
@@ -30,6 +29,7 @@ html, body, main {
    -webkit-box-pack: center;
    -ms-flex-pack: center;
    justify-content: center;
+   overflow-x: hidden;
 }
 
 #session {
@@ -55,6 +55,8 @@ html, body, main {
 .clockdiv {
    position: relative;
    width: 50%;
+   height: 13em;
+   margin-top: 5%;
    display: -webkit-box;
    display: -ms-flexbox;
    display: flex;
@@ -76,6 +78,8 @@ html, body, main {
    -webkit-box-align: center;
    -ms-flex-align: center;
    align-items: center;
+   width: 40%;
+   margin: -5% 30%;
 }
 
 .colon {
@@ -219,8 +223,8 @@ input[type=range]::-ms-track {
 input[type=range]::-webkit-slider-thumb {
    -webkit-appearance: none;
    border: 2px solid #000000;
-   height: 2.1rem;
-   width: 2.1rem;
+   height: 2.2rem;
+   width: 2.2rem;
    border-radius: 50%;
    background: white;
    cursor: move;
@@ -228,8 +232,6 @@ input[type=range]::-webkit-slider-thumb {
    cursor: -moz-grab;
    cursor: -webkit-grab;
    margin-top: -14px;
-   -webkit-box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
    -webkit-transition: all 0.2s ease-in-out;
    -o-transition: all 0.2s ease-in-out;
    transition: all 0.2s ease-in-out;
