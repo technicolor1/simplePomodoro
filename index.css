@@ -30,6 +30,7 @@ html, body, main {
    -ms-flex-pack: center;
    justify-content: center;
    overflow-x: hidden;
+   padding-top: 2%;
 }
 
 #session {
@@ -156,40 +157,10 @@ button[name=pomodoro] {
    color: var(--tomato-color);
 }
 
+/* NOTE: transition time is equal to animation time of rotateIn / rotateOut */
 .hide {
-   display: none;
-}
-
-/* fade-in and fade-out for session slider */
-
-.fadeOut-session {
-   transform: translate(-100%);
    visibility: hidden;
-   opacity: 0;
-   transition: visibility 0s linear 0.5s, opacity 0.5s, transform 0.3s;
-}
-
-.fadeIn-session {
-   transform: translate(0%);
-   visibility: visible;
-   opacity: 1;
-   transition: visibility 0s linear 0s, opacity 0.5s, transform 0.3s;
-}
-
-/* fade-in and fade-out for break slider */
-
-.fadeOut-break {
-   transform: translate(100%);
-   visibility: hidden;
-   opacity: 0;
-   transition: visibility 0s linear 0.5s, opacity 0.5s, transform 0.3s;
-}
-
-.fadeIn-break {
-   transform: translate(0%);
-   visibility: visible;
-   opacity: 1;
-   transition: visibility 0s linear 0s, opacity 0.5s, transform 0.3s;
+   transition: visibility 0s linear 0.78s;
 }
 
 /* following 3 blocks hide the default range slider style */

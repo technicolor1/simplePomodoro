@@ -20,10 +20,11 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
 // on window load
-window.onload = () => {
-   colon.classList.remove("colon");
-};
+// window.onload = () => {
+// };
 
+colon.classList.remove("colon");
+resetBtn.classList.toggle("hide");
 sessionTimeSet.value = 25;
 breakTimeSet.value = 5;
 
@@ -35,11 +36,7 @@ function listener(ev) {
    });
 }
 
-const setterArr = [
-                  breakTimeSet,
-                  sessionTimeSet
-                  ];
-setterArr.forEach((setter) => {
+[breakTimeSet, sessionTimeSet].forEach((setter) => {
    listener();
    setter.addEventListener("touchstart", () => {
       listener();
@@ -81,11 +78,15 @@ function resetSession() {
    minuteSpan.innerHTML = sessionSetter.value;
    secondSpan.innerHTML = "00";
 
-   sessionSetter.classList.remove("fadeOut-session");
-   sessionSetter.classList.add("fadeIn-session");
+   sessionSetter.classList.remove("fadeOutLeft");
+   sessionSetter.classList.add("fadeInLeft");
 
-   breakSetter.classList.remove("fadeOut-break");
-   breakSetter.classList.add("fadeIn-break");
+   breakSetter.classList.remove("fadeOutRight");
+   breakSetter.classList.add("fadeInRight");
+
+   resetBtn.classList.remove("rotateIn");
+   resetBtn.classList.add("rotateOut");
+   resetBtn.classList.add("hide");
 }
 
 function timeLeft(end) {
@@ -128,10 +129,14 @@ playpause.addEventListener("click", () => {
 
 function startPomodoro() {
    colon.classList.add("colon");
-   sessionSetter.classList.remove("fadeIn-session");
-   breakSetter.classList.remove("fadeIn-break");
-   sessionSetter.classList.add("fadeOut-session");
-   breakSetter.classList.add("fadeOut-break");
+   sessionSetter.classList.remove("fadeInLeft");
+   breakSetter.classList.remove("fadeInRight");
+   sessionSetter.classList.add("fadeOutLeft");
+   breakSetter.classList.add("fadeOutRight");
+
+   resetBtn.classList.remove("hide");
+   resetBtn.classList.remove("rotateOut");
+   resetBtn.classList.add("rotateIn");
 
    pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
