@@ -160,7 +160,9 @@ button[name=pomodoro] {
 /* NOTE: transition time is equal to animation time of rotateIn / rotateOut */
 .hide {
    visibility: hidden;
-   transition: visibility 0s linear 0.78s;
+   -webkit-transition: visibility 0s linear 1s;
+   -o-transition: visibility 0s linear 1s;
+   transition: visibility 0s linear 1s;
 }
 
 /* following 3 blocks hide the default range slider style */

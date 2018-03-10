@@ -24,7 +24,8 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
 // };
 
 colon.classList.remove("colon");
-resetBtn.classList.toggle("hide");
+resetBtn.classList.add("hide");
+playpause.classList.add("hide");
 sessionTimeSet.value = 25;
 breakTimeSet.value = 5;
 
@@ -87,6 +88,10 @@ function resetSession() {
    resetBtn.classList.remove("rotateIn");
    resetBtn.classList.add("rotateOut");
    resetBtn.classList.add("hide");
+
+   playpause.classList.remove("ZoomIn");
+   playpause.classList.add("zoomOut");
+   playpause.classList.add("hide");
 }
 
 function timeLeft(end) {
@@ -137,6 +142,10 @@ function startPomodoro() {
    resetBtn.classList.remove("hide");
    resetBtn.classList.remove("rotateOut");
    resetBtn.classList.add("rotateIn");
+
+   playpause.classList.remove("hide");
+   playpause.classList.remove("zoomOut");
+   playpause.classList.add("zoomIn");
 
    pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
