@@ -72,6 +72,7 @@ html, body, main {
    -webkit-box-align: center;
    -ms-flex-align: center;
    align-items: center;
+   flex-direction: column;
 }
 
 .controllers {
@@ -94,6 +95,16 @@ html, body, main {
 .time {
    -webkit-animation: blinker 1.25s linear infinite;
    animation: blinker 1.25s linear infinite;
+}
+
+.progress {
+   width:50%;
+   background-color: #d0d0d0;
+}
+#progress1 {
+   width:0%;
+   height:30px;
+   background-color: forestgreen;
 }
 
 #session {

@@ -5,6 +5,7 @@ const breakSetter = document.querySelector("#break"),
    minuteSpan = document.querySelector(".minutes"),
    playpause = document.querySelector("button[name=playresume]"),
    pomoBtn = document.querySelector("button[name=pomodoro]"),
+   progress = document.querySelector("#progress1"),
    resetBtn = document.querySelector("button[name=reset]"),
    secondSpan = document.querySelector(".seconds"),
    sessionSetter = document.querySelector("#session");
@@ -14,6 +15,7 @@ let breakTime = null,
    didBreak = false,
    isPaused = false,
    pomodoro = null,
+   progressremain = null,
    timeInterval = null,
    timeRemain = null;
 
@@ -64,9 +66,6 @@ resetBtn.addEventListener("click", () => {
 })
 
 function resetSession() {
-   colon.classList.remove("colon");
-   minuteSpan.classList.remove("time");
-   secondSpan.classList.remove("time");
    clearInterval(timeInterval);
    sessionSetter.value = pomodoro;
    breakSetter.value = breakTime;
@@ -74,6 +73,14 @@ function resetSession() {
    playpause.innerHTML = "<i class='fas fa-pause'></i>";
    minuteSpan.innerHTML = sessionSetter.value;
    secondSpan.innerHTML = "00";
+   progressremain = null;
+
+   progress.style.width = 0;
+
+   colon.classList.remove("colon");
+
+   minuteSpan.classList.remove("time");
+   secondSpan.classList.remove("time");
 
    sessionSetter.classList.remove("fadeOutLeft");
    sessionSetter.classList.add("fadeInLeft");
@@ -100,6 +107,8 @@ function timeLeft(end) {
    var minutes = Math.floor((total / 1000 / 60) % 60);
    var hours = Math.floor((total / 1000 / 60 / 60) % 60);
 
+   console.log(total);
+
    return {
       "total": total,
       "minutes": minutes,
@@ -114,11 +123,14 @@ playpause.addEventListener("click", () => {
    if (isPaused === false) {
       isPaused = true;
       colon.classList.toggle("colon");
-      minuteSpan.classList.toggle("time");
-      secondSpan.classList.toggle("time");
       clearInterval(timeInterval);
       timeRemain = timeLeft(deadline).total;
       playpause.innerHTML = "<i class='fas fa-play'></i>";
+
+      minuteSpan.classList.toggle("time");
+      secondSpan.classList.toggle("time");
+
+      progressremain = (progress.style.width).slice(0, -1);
       //resume
    } else if (isPaused === true) {
       isPaused = false;
@@ -169,17 +181,33 @@ function startBreak() {
 }
 
 function startTimer(deadline) {
+   let percent = 100 / (pomodoro * 60);
+   let width = 0;
+
+   if (progressremain !== null) {
+      width = parseFloat(progressremain);
+   }
    function updateClock() {
-      const time = timeLeft(deadline);
+      let time = timeLeft(deadline);
       minuteSpan.innerHTML = (time.minutes);
+
+      // don't change the bar unless time is elapsing
+      //FIXME: width still increases when resuming from pause
+      if (time.total !== (pomodoro * 60000)) {
+         width += percent;
+         progress.style.width = width + "%";
+      }
+
       if (time.hours === 1) {
          minuteSpan.innerHTML = "60";
       }
+
       if (time.minutes < 10) {
          minuteSpan.innerHTML = "0" + minuteSpan.innerHTML;
       }
       secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
 
+      // console.log(time.total);
       if (time.total < 0) {
          clearInterval(timeInterval);
          if (didBreak === false) {
