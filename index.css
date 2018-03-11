@@ -14,11 +14,17 @@ html, body, main {
    user-select: none;
 }
 
+.settings {
+   display: flex;
+   justify-content: flex-end;
+   padding: 2em;
+}
+
 .reset-control {
    display: flex;
    justify-content: center;
    align-items: center;
-   margin: 15% 45% -5% 45%;
+   margin: 4% 45% -5% 45%;
 }
 
 .main {
@@ -154,7 +160,12 @@ button[name=pomodoro] {
    color: var(--tomato-color);
 }
 
-/* NOTE: transition time is equal to animation time of rotateIn / rotateOut */
+button[name=settings] {
+   display: flex;
+   padding: 0;
+}
+
+/* NOTE: transition time is 0.25s longer than animation time of rotateIn / rotateOut */
 .hide {
    visibility: hidden;
    -webkit-transition: visibility 0s linear 1s;

@@ -5,6 +5,7 @@ const breakSetter = document.querySelector("#break"),
    minuteSpan = document.querySelector(".minutes"),
    playpause = document.querySelector("button[name=playresume]"),
    resetBtn = document.querySelector("button[name=reset]"),
+   pomoBtn = document.querySelector("button[name=pomodoro"),
    secondSpan = document.querySelector(".seconds"),
    sessionSetter = document.querySelector("#session");
 
@@ -19,10 +20,6 @@ let breakTime = null,
 let breakTimeSet = document.querySelector("input[name=set-break]"),
    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
-// on window load
-// window.onload = () => {
-// };
-
 colon.classList.remove("colon");
 resetBtn.classList.add("hide");
 playpause.classList.add("hide");
@@ -33,7 +30,6 @@ function listener(ev) {
    window.requestAnimationFrame(() => {
       document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
       document.querySelector("#break-value").innerHTML = breakTimeSet.value;
-      minuteSpan.innerText = sessionTimeSet.value;
    });
 }
 
@@ -92,6 +88,10 @@ function resetSession() {
    playpause.classList.remove("ZoomIn");
    playpause.classList.add("zoomOut");
    playpause.classList.add("hide");
+
+   pomoBtn.classList.remove("zoomOut");
+   pomoBtn.classList.remove("hide");
+   pomoBtn.classList.add("zoomIn");
 }
 
 function timeLeft(end) {
@@ -147,6 +147,10 @@ function startPomodoro() {
    playpause.classList.remove("zoomOut");
    playpause.classList.add("zoomIn");
 
+   pomoBtn.classList.remove("zoomIn");
+   pomoBtn.classList.add("zoomOut");
+   pomoBtn.classList.add("hide");
+
    pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
@@ -170,6 +174,9 @@ function startTimer(deadline) {
       minuteSpan.innerHTML = (time.minutes);
       if (time.hours === 1) {
          minuteSpan.innerHTML = "60";
+      }
+      if (time.minutes < 10) {
+         minuteSpan.innerHTML = "0" + minuteSpan.innerHTML;
       }
       secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
 
