@@ -4,8 +4,8 @@ const breakSetter = document.querySelector("#break"),
    colon = document.querySelector(".colon"),
    minuteSpan = document.querySelector(".minutes"),
    playpause = document.querySelector("button[name=playresume]"),
+   pomoBtn = document.querySelector("button[name=pomodoro]"),
    resetBtn = document.querySelector("button[name=reset]"),
-   pomoBtn = document.querySelector("button[name=pomodoro"),
    secondSpan = document.querySelector(".seconds"),
    sessionSetter = document.querySelector("#session");
 
