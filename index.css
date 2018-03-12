@@ -97,16 +97,6 @@ html, body, main {
    animation: blinker 1.25s linear infinite;
 }
 
-.progress {
-   width:50%;
-   background-color: #d0d0d0;
-}
-#progress1 {
-   width:0%;
-   height:30px;
-   background-color: forestgreen;
-}
-
 #session {
    float: left;
 }
