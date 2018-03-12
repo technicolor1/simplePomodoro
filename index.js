@@ -73,8 +73,6 @@ function resetSession() {
    minuteSpan.innerHTML = sessionSetter.value;
    secondSpan.innerHTML = "00";
 
-   progress.style.width = 0;
-
    colon.classList.remove("colon");
 
    minuteSpan.classList.remove("time");
