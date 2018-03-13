@@ -29,17 +29,12 @@ html, body, main {
    to { transform: rotateZ(360deg); }
 }
 
-.settings {
-   display: flex;
-   justify-content: flex-end;
-   padding: 2em;
-}
-
 .reset-control {
    display: flex;
    justify-content: center;
    align-items: center;
-   margin: 4% 45% -5% 45%;
+   margin: 0 45% -5% 45%;
+   padding-top: 10%;
 }
 
 .main {
@@ -163,6 +158,7 @@ button {
 
 button:hover {
    opacity: 0.75;
+   padding:0;
 }
 
 button:focus {
@@ -173,12 +169,7 @@ button[name=pomodoro] {
    color: var(--tomato-color);
 }
 
-button[name=settings] {
-   display: flex;
-   padding: 0;
-}
-
-button[name=settings], button[name=reset], button[name=playresume] {
+button[name=reset], button[name=playresume] {
    color: var(--nice-gray);
 }
 
