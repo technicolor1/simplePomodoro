@@ -1,5 +1,8 @@
 :root {
    --tomato-color: #ff6347;
+   --nice-white: #f0f0f0;
+   --nice-textshadow: 0px 7px 0 hsl(0, 0%, 18%);
+   --nice-gray: hsl(0, 0%, 15%);
 }
 
 * {
@@ -12,6 +15,18 @@ html, body, main {
    -moz-user-select: none;
    -ms-user-select: none;
    user-select: none;
+   background: #1A2980;  /* fallback for old browsers */
+   background: -webkit-linear-gradient(to bottom, #26D0CE, #1A2980);  /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to bottom, rgb(19, 177, 174), #1A2980); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center center;
+   height:100%;
+   /* animation: spin 60s linear infinite; */
+}
+@keyframes spin {
+   from { transform: rotateZ(0deg);  }
+   to { transform: rotateZ(360deg); }
 }
 
 .settings {
@@ -121,12 +136,16 @@ h1 {
    text-align: center;
    font-size: 80px;
    width: 248px;
+   color: var(--nice-white);
+   text-shadow: var(--nice-textshadow);
 }
 
 h2 {
    padding-top: 70%;
    text-align: center;
    font-size: 30px;
+   color: var(--nice-white);
+   text-shadow: var(--nice-textshadow);
 }
 
 button {
@@ -144,17 +163,10 @@ button {
 
 button:hover {
    opacity: 0.75;
-   -webkit-transform: scale(1.3);
-   -ms-transform: scale(1.3);
-   transform: scale(1.3);
 }
 
 button:focus {
    outline: none;
-}
-
-button[name=break] {
-   color: #af772f;
 }
 
 button[name=pomodoro] {
@@ -164,6 +176,10 @@ button[name=pomodoro] {
 button[name=settings] {
    display: flex;
    padding: 0;
+}
+
+button[name=settings], button[name=reset], button[name=playresume] {
+   color: var(--nice-gray);
 }
 
 /* NOTE: transition time is 0.25s longer than animation time of rotateIn / rotateOut */
@@ -208,7 +224,7 @@ input[type=range]::-webkit-slider-thumb {
    height: 2.2rem;
    width: 2.2rem;
    border-radius: 50%;
-   background: white;
+   background: var(--nice-white);
    cursor: move;
    cursor: grab;
    cursor: -moz-grab;

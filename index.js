@@ -5,7 +5,6 @@ const breakSetter = document.querySelector("#break"),
    minuteSpan = document.querySelector(".minutes"),
    playpause = document.querySelector("button[name=playresume]"),
    pomoBtn = document.querySelector("button[name=pomodoro]"),
-   progress = document.querySelector("#progress1"),
    resetBtn = document.querySelector("button[name=reset]"),
    secondSpan = document.querySelector(".seconds"),
    sessionSetter = document.querySelector("#session");
@@ -64,6 +63,46 @@ resetBtn.addEventListener("click", () => {
    resetSession();
 })
 
+
+//pausing and resuming
+playpause.addEventListener("click", () => {
+   //pause
+   if (isPaused === false) {
+      isPaused = true;
+      colon.classList.toggle("colon");
+      clearInterval(timeInterval);
+      timeRemain = timeLeft(deadline).total;
+      playpause.innerHTML = "<i class='fas fa-play'></i>";
+
+      minuteSpan.classList.toggle("time");
+      secondSpan.classList.toggle("time");
+
+      //resume
+   } else if (isPaused === true) {
+      isPaused = false;
+      colon.classList.toggle("colon");
+      minuteSpan.classList.toggle("time");
+      secondSpan.classList.toggle("time");
+      deadline = new Date(Date.parse(new Date()) + timeRemain);
+      startTimer(deadline);
+      playpause.innerHTML = "<i class='fas fa-pause'></i>";
+   }
+})
+
+function timeLeft(end) {
+   var total = Date.parse(end) - Date.parse(new Date());
+   var seconds = Math.floor((total / 1000) % 60);
+   var minutes = Math.floor((total / 1000 / 60) % 60);
+   var hours = Math.floor((total / 1000 / 60 / 60) % 60);
+
+   return {
+      "total": total,
+      "minutes": minutes,
+      "seconds": seconds,
+      "hours": hours
+   };
+}
+
 function resetSession() {
    clearInterval(timeInterval);
    sessionSetter.value = pomodoro;
@@ -96,46 +135,6 @@ function resetSession() {
    pomoBtn.classList.remove("hide");
    pomoBtn.classList.add("zoomIn");
 }
-
-function timeLeft(end) {
-   var total = Date.parse(end) - Date.parse(new Date());
-   var seconds = Math.floor((total / 1000) % 60);
-   var minutes = Math.floor((total / 1000 / 60) % 60);
-   var hours = Math.floor((total / 1000 / 60 / 60) % 60);
-
-   return {
-      "total": total,
-      "minutes": minutes,
-      "seconds": seconds,
-      "hours": hours
-   };
-}
-
-//pausing and resuming
-playpause.addEventListener("click", () => {
-   //pause
-   if (isPaused === false) {
-      isPaused = true;
-      colon.classList.toggle("colon");
-      clearInterval(timeInterval);
-      timeRemain = timeLeft(deadline).total;
-      playpause.innerHTML = "<i class='fas fa-play'></i>";
-
-      minuteSpan.classList.toggle("time");
-      secondSpan.classList.toggle("time");
-
-      //resume
-   } else if (isPaused === true) {
-      isPaused = false;
-      colon.classList.toggle("colon");
-      minuteSpan.classList.toggle("time");
-      secondSpan.classList.toggle("time");
-      deadline = new Date(Date.parse(new Date()) + timeRemain);
-      startTimer(deadline);
-      playpause.innerHTML = "<i class='fas fa-pause'></i>";
-   }
-})
-
 
 function startPomodoro() {
    colon.classList.add("colon");
@@ -176,10 +175,11 @@ function startBreak() {
 function startTimer(deadline) {
    function updateClock() {
       let time = timeLeft(deadline);
-      minuteSpan.innerHTML = (time.minutes);
 
       if (time.hours === 1) {
          minuteSpan.innerHTML = "60";
+      } else {
+         minuteSpan.innerHTML = (time.minutes);
       }
 
       if (time.minutes < 10) {
