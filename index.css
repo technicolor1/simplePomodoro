@@ -33,8 +33,7 @@ html, body, main {
    display: flex;
    justify-content: center;
    align-items: center;
-   margin: 0 45% -5% 45%;
-   padding-top: 10%;
+   padding-top: 15%;
 }
 
 .main {
@@ -45,7 +44,6 @@ html, body, main {
    -ms-flex-pack: center;
    justify-content: center;
    overflow-x: hidden;
-   padding-top: 2%;
 }
 
 #session {
@@ -72,7 +70,7 @@ html, body, main {
    position: relative;
    width: 50%;
    height: 13em;
-   margin-top: 5%;
+   margin-top: 3%;
    display: -webkit-box;
    display: -ms-flexbox;
    display: flex;
