@@ -167,6 +167,7 @@ button:focus {
 
 button[name=pomodoro] {
    color: var(--tomato-color);
+   text-shadow: var(--nice-textshadow);
 }
 
 button[name=reset], button[name=playresume] {
