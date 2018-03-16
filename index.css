@@ -54,6 +54,7 @@ html, body, main {
    -webkit-box-direction: normal;
    -ms-flex-direction: column;
    flex-direction: column;
+   float: left;
 }
 
 #break {
@@ -64,13 +65,14 @@ html, body, main {
    -webkit-box-direction: normal;
    -ms-flex-direction: column;
    flex-direction: column;
+   float: right;
 }
 
 .clockdiv {
    position: relative;
    width: 50%;
    height: 13em;
-   margin-top: 3%;
+   margin-top: 5%;
    display: -webkit-box;
    display: -ms-flexbox;
    display: flex;
@@ -105,12 +107,8 @@ html, body, main {
    animation: blinker 1.25s linear infinite;
 }
 
-#session {
-   float: left;
-}
-
-#break {
-   float: right;
+#session, #break {
+   padding-top: 2%;
 }
 
 @-webkit-keyframes blinker {
