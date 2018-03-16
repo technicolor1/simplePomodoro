@@ -20,16 +20,19 @@ let breakTime = null,
 let breakTimeSet = document.querySelector("input[name=set-break]"),
    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
+let sounder = new Audio("assets/Early_twilight.mp3");
+
 colon.classList.remove("colon");
 resetBtn.classList.add("hide");
 playpause.classList.add("hide");
 sessionTimeSet.value = 25;
 breakTimeSet.value = 5;
 
-function listener(ev) {
+function listener() {
    window.requestAnimationFrame(() => {
       document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
       document.querySelector("#break-value").innerHTML = breakTimeSet.value;
+      minuteSpan.innerHTML = sessionTimeSet.value;
    });
 }
 
@@ -77,7 +80,7 @@ playpause.addEventListener("click", () => {
       minuteSpan.classList.toggle("time");
       secondSpan.classList.toggle("time");
 
-      //resume
+   //resume
    } else if (isPaused === true) {
       isPaused = false;
       colon.classList.toggle("colon");
@@ -190,7 +193,10 @@ function startTimer(deadline) {
       if (time.total < 0) {
          clearInterval(timeInterval);
          if (didBreak === false) {
-            startBreak();
+            minuteSpan.innerHTML = "00";
+            secondSpan.innerHTML = "00";
+            sounder.play();
+            setTimeout(startBreak, 8000);
          } else if (didBreak === true) {
             startPomodoro();
          }
