@@ -196,7 +196,7 @@ function startTimer(deadline) {
             minuteSpan.innerHTML = "00";
             secondSpan.innerHTML = "00";
             sounder.play();
-            setTimeout(startBreak, 8000);
+            startBreak();
          } else if (didBreak === true) {
             startPomodoro();
          }
