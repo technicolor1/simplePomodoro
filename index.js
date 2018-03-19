@@ -20,7 +20,10 @@ let breakTime = null,
 let breakTimeSet = document.querySelector("input[name=set-break]"),
    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
-let sounder = new Audio("assets/Early_twilight.mp3");
+// let sounder = new Audio("assets/Early_twilight.mp3");
+let sounder = new Howl({
+   src: ['assets/Early_twilight.mp3']
+});
 
 colon.classList.remove("colon");
 resetBtn.classList.add("hide");
@@ -28,8 +31,10 @@ playpause.classList.add("hide");
 sessionTimeSet.value = 25;
 breakTimeSet.value = 5;
 
-function listener() {
+function listener(ev) {
    window.requestAnimationFrame(() => {
+      console.log(ev.toElement.parentElement.id);
+
       document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
       document.querySelector("#break-value").innerHTML = breakTimeSet.value;
       minuteSpan.innerHTML = sessionTimeSet.value;
@@ -41,7 +46,7 @@ function listener() {
    setter.addEventListener("touchstart", () => {
       listener();
       setter.addEventListener("touchmove", listener);
-   });
+   }, {"passive": true});
 
    setter.addEventListener("touchend", () => {
       setter.removeEventListener("touchmove", listener);
@@ -108,6 +113,7 @@ function timeLeft(end) {
 
 function resetSession() {
    clearInterval(timeInterval);
+   sounder.fade(1.0, 0.0, 1000);
    sessionSetter.value = pomodoro;
    breakSetter.value = breakTime;
    isPaused = false;
@@ -158,7 +164,8 @@ function startPomodoro() {
    pomoBtn.classList.add("zoomOut");
    pomoBtn.classList.add("hide");
 
-   pomodoro = sessionTimeSet.value;
+   // pomodoro = sessionTimeSet.value;
+   pomodoro = 0.01;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
@@ -193,11 +200,10 @@ function startTimer(deadline) {
       if (time.total < 0) {
          clearInterval(timeInterval);
          if (didBreak === false) {
-            minuteSpan.innerHTML = "00";
-            secondSpan.innerHTML = "00";
             sounder.play();
             startBreak();
          } else if (didBreak === true) {
+            sounder.play();
             startPomodoro();
          }
       }
