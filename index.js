@@ -22,7 +22,7 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
 
 // let sounder = new Audio("assets/Early_twilight.mp3");
 let sounder = new Howl({
-   src: ['assets/Early_twilight.mp3']
+   "src": ["assets/Early_twilight.mp3"]
 });
 
 colon.classList.remove("colon");
@@ -33,15 +33,23 @@ breakTimeSet.value = 5;
 
 function listener(ev) {
    window.requestAnimationFrame(() => {
-      console.log(ev.toElement.parentElement.id);
+      let el = ev.toElement.parentElement.id;
+      console.log(el);
 
       document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
       document.querySelector("#break-value").innerHTML = breakTimeSet.value;
-      minuteSpan.innerHTML = sessionTimeSet.value;
+      if (el === "session") {
+         minuteSpan.innerHTML = sessionTimeSet.value;
+      } else if (el === "break") {
+         minuteSpan.innerHTML = breakTimeSet.value;
+      }
    });
 }
 
-[breakTimeSet, sessionTimeSet].forEach((setter) => {
+[
+breakTimeSet,
+sessionTimeSet
+].forEach((setter) => {
    listener();
    setter.addEventListener("touchstart", () => {
       listener();
@@ -164,8 +172,7 @@ function startPomodoro() {
    pomoBtn.classList.add("zoomOut");
    pomoBtn.classList.add("hide");
 
-   // pomodoro = sessionTimeSet.value;
-   pomodoro = 0.01;
+   pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
