@@ -20,7 +20,6 @@ let breakTime = null,
 let breakTimeSet = document.querySelector("input[name=set-break]"),
    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
-// let sounder = new Audio("assets/Early_twilight.mp3");
 let sounder = new Howl({
    "src": ["assets/Early_twilight.mp3"]
 });
