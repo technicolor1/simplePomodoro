@@ -32,9 +32,11 @@ sessionTimeSet.value = 25;
 breakTimeSet.value = 5;
 
 function listener(ev) {
+   if (typeof ev === "undefined") {
+      return;
+   }
    window.requestAnimationFrame(() => {
       let el = ev.toElement.parentElement.id;
-      console.log(el);
 
       document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
       document.querySelector("#break-value").innerHTML = breakTimeSet.value;
