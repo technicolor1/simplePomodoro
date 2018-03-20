@@ -3,6 +3,7 @@
 const breakSetter = document.querySelector("#break"),
    colon = document.querySelector(".colon"),
    minuteSpan = document.querySelector(".minutes"),
+   notify = document.querySelector(".notify"),
    playpause = document.querySelector("button[name=playresume]"),
    pomoBtn = document.querySelector("button[name=pomodoro]"),
    resetBtn = document.querySelector("button[name=reset]"),
@@ -21,7 +22,8 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
    sessionTimeSet = document.querySelector("input[name=set-pomodoro]");
 
 let sounder = new Howl({
-   "src": ["assets/Early_twilight.mp3"]
+   "src": ["assets/Early_twilight.mp3"],
+   "volume": 0.5
 });
 
 colon.classList.remove("colon");
@@ -122,7 +124,7 @@ function timeLeft(end) {
 
 function resetSession() {
    clearInterval(timeInterval);
-   sounder.fade(1.0, 0.0, 1000);
+   sounder.stop();
    sessionSetter.value = pomodoro;
    breakSetter.value = breakTime;
    isPaused = false;
@@ -173,7 +175,8 @@ function startPomodoro() {
    pomoBtn.classList.add("zoomOut");
    pomoBtn.classList.add("hide");
 
-   pomodoro = sessionTimeSet.value;
+   // pomodoro = sessionTimeSet.value;
+   pomodoro = 0.01;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
@@ -182,7 +185,8 @@ function startPomodoro() {
 }
 
 function startBreak() {
-   breakTime = breakTimeSet.value;
+   // breakTime = breakTimeSet.value;
+   breakTime = 0.02;
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
@@ -209,9 +213,19 @@ function startTimer(deadline) {
          clearInterval(timeInterval);
          if (didBreak === false) {
             sounder.play();
+            if (Push.Permission.has() === true) {
+               Push.create("Break Time!", {
+                  "timeout": 5000
+              });
+            }
             startBreak();
          } else if (didBreak === true) {
             sounder.play();
+            if (Push.Permission.has() === true) {
+               Push.create("Start Working!", {
+                  "timeout": 5000
+              });
+            }
             startPomodoro();
          }
       }
@@ -224,3 +238,17 @@ function startTimer(deadline) {
    updateClock();
    timeInterval = setInterval(updateClock, 1000);
 }
+
+setTimeout(() => {
+   Push.Permission.request(onGranted, onDenied);
+
+   function onGranted() {
+      return;
+   }
+
+   function onDenied() {
+      notify.style.visibility = "visible";
+      notify.classList.add("slideInDown");
+   }
+
+}, 2000);
