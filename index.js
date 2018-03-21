@@ -237,18 +237,15 @@ function startTimer(deadline) {
    timeInterval = setInterval(updateClock, 1000);
 }
 
-setTimeout(() => {
-   Push.Permission.request(onGranted, onDenied);
+Push.Permission.request(onGranted, onDenied);
 
-   function onGranted() {
-      notify.style.display = "none";
-   }
+function onGranted() {
+   notify.style.display = "none";
+}
 
-   function onDenied() {
-      notify.style.display = "none";
-   }
-
-}, 0);
+function onDenied() {
+   notify.style.display = "none";
+}
 
 document.querySelector(".exit-notif").addEventListener("click", () => {
    notify.classList.toggle("slideInDown");
