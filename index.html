@@ -9,7 +9,7 @@
    <!-- font awesome -->
    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
    <!-- google font -->
-   <link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
    <!-- pushjs -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.min.js"></script>
    <!-- animatecss -->
@@ -19,7 +19,12 @@
 </head>
 
 <body>
-   <div class="animated notify" style="visibility: hidden"><h3>It seems notifications are disabled. Please enable Notifications in your browser settings</h3></div>
+   <div class="notify animated slideInDown">
+      <span class="message">This site uses Notifications to alert when time is up. Don't worry, I won't spam 🙂&nbsp;&nbsp;&nbsp;</span>
+      <button class="exit-notif">
+         <i class="fas fa-times"></i>
+      </button>
+   </div>
 
    <div class="reset-control">
       <button title="reset" type="button" class="animated" name="reset">

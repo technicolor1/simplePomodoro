@@ -175,8 +175,7 @@ function startPomodoro() {
    pomoBtn.classList.add("zoomOut");
    pomoBtn.classList.add("hide");
 
-   // pomodoro = sessionTimeSet.value;
-   pomodoro = 0.01;
+   pomodoro = sessionTimeSet.value;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
@@ -185,8 +184,7 @@ function startPomodoro() {
 }
 
 function startBreak() {
-   // breakTime = breakTimeSet.value;
-   breakTime = 0.02;
+   breakTime = breakTimeSet.value;
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
@@ -243,12 +241,16 @@ setTimeout(() => {
    Push.Permission.request(onGranted, onDenied);
 
    function onGranted() {
-      return;
+      notify.style.display = "none";
    }
 
    function onDenied() {
-      notify.style.visibility = "visible";
-      notify.classList.add("slideInDown");
+      notify.style.display = "none";
    }
 
-}, 2000);
+}, 0);
+
+document.querySelector(".exit-notif").addEventListener("click", () => {
+   notify.classList.toggle("slideInDown");
+   notify.classList.add("slideOutUp");
+})
