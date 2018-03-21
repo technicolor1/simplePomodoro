@@ -248,6 +248,6 @@ function onDenied() {
 }
 
 document.querySelector(".exit-notif").addEventListener("click", () => {
-   notify.classList.toggle("slideInDown");
+   notify.classList.remove("slideInDown");
    notify.classList.add("slideOutUp");
 })
