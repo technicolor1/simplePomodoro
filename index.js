@@ -13,6 +13,7 @@ let breakTime = null,
    deadline = null,
    didBreak = false,
    isPaused = false,
+   permitSounds = true,
    pomodoro = null,
    timeInterval = null,
    timeRemain = null;
@@ -25,33 +26,17 @@ let sounder = new Howl({
    "volume": 0.4
 });
 
-colon.classList.remove("colon");
-resetBtn.classList.add("hide");
-playpause.classList.add("hide");
-sessionTimeSet.value = 25;
-breakTimeSet.value = 5;
+document.onload = init();
 
-function listener(ev) {
-   if (typeof ev === "undefined") {
-      return;
-   }
-   window.requestAnimationFrame(() => {
-      let el = ev.toElement.parentElement.id;
-
-      document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
-      document.querySelector("#break-value").innerHTML = breakTimeSet.value;
-      if (el === "session") {
-         minuteSpan.innerHTML = sessionTimeSet.value;
-      } else if (el === "break") {
-         minuteSpan.innerHTML = breakTimeSet.value;
-      }
-   });
+function init() {
+   colon.classList.remove("colon");
+   resetBtn.classList.add("hide");
+   playpause.classList.add("hide");
+   sessionTimeSet.value = 25;
+   breakTimeSet.value = 5;
 }
 
-[
-breakTimeSet,
-sessionTimeSet
-].forEach((setter) => {
+[breakTimeSet, sessionTimeSet].forEach((setter) => {
    listener();
    setter.addEventListener("touchstart", () => {
       listener();
@@ -70,6 +55,22 @@ sessionTimeSet
    setter.addEventListener("mouseup", () => {
       setter.removeEventListener("mousemove", listener);
    })
+
+   function listener(ev) {
+      if (typeof ev === "undefined") {
+         return;
+      }
+      window.requestAnimationFrame(() => {
+         let el = ev.toElement.parentElement.id;
+         document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
+         document.querySelector("#break-value").innerHTML = breakTimeSet.value;
+         if (el === "session") {
+            minuteSpan.innerHTML = sessionTimeSet.value;
+         } else if (el === "break") {
+            minuteSpan.innerHTML = breakTimeSet.value;
+         }
+      });
+   }
 })
 
 document.querySelector("button[name=pomodoro]").addEventListener("click", () => {
@@ -77,10 +78,25 @@ document.querySelector("button[name=pomodoro]").addEventListener("click", () => 
    startPomodoro();
 });
 
-resetBtn.addEventListener("click", () => {
-   resetSession();
+resetBtn.addEventListener("click", resetSession);
+
+const notifBtn = document.querySelector("button[name=notif");
+notifBtn.addEventListener("click", () => {
+   Push.Permission.request(onGranted, onDenied);
+
+   function onGranted() {
+      console.log("Granted")
+   }
+   function onDenied() {
+      console.log("Denied")
+   }
 })
 
+const soundBtn = document.querySelector("button[name=sfx");
+soundBtn.addEventListener("click", () => {
+   permitSounds = !permitSounds;
+   !permitSounds ? soundBtn.style.color = "red" : soundBtn.style.color = "black";
+});
 
 //pausing and resuming
 playpause.addEventListener("click", () => {
@@ -175,6 +191,7 @@ function startPomodoro() {
    pomoBtn.classList.add("hide");
 
    pomodoro = sessionTimeSet.value;
+   // pomodoro = 0.01;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
@@ -209,7 +226,9 @@ function startTimer(deadline) {
       if (time.total < 0) {
          clearInterval(timeInterval);
          if (didBreak === false) {
-            sounder.play();
+            if (permitSounds === true) {
+               sounder.play();
+            }
             if (Push.Permission.has() === true) {
                Push.create("Break Time!", {
                   "timeout": 5000
@@ -217,7 +236,9 @@ function startTimer(deadline) {
             }
             startBreak();
          } else if (didBreak === true) {
-            sounder.play();
+            if (permitSounds === true) {
+               sounder.play();
+            }
             if (Push.Permission.has() === true) {
                Push.create("Start Working!", {
                   "timeout": 5000
@@ -234,14 +255,4 @@ function startTimer(deadline) {
     */
    updateClock();
    timeInterval = setInterval(updateClock, 1000);
-}
-
-Push.Permission.request(onGranted, onDenied);
-
-function onGranted() {
-   console.log("Granted")
-}
-
-function onDenied() {
-   console.log("Denied")   
 }

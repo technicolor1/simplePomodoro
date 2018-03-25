@@ -28,6 +28,8 @@ html, body, main {
    to { transform: rotateZ(360deg); }
 }
 
+/* Main elements */
+
 .reset-control {
    display: flex;
    justify-content: center;
