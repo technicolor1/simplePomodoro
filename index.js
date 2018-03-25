@@ -3,7 +3,6 @@
 const breakSetter = document.querySelector("#break"),
    colon = document.querySelector(".colon"),
    minuteSpan = document.querySelector(".minutes"),
-   notify = document.querySelector(".notify"),
    playpause = document.querySelector("button[name=playresume]"),
    pomoBtn = document.querySelector("button[name=pomodoro]"),
    resetBtn = document.querySelector("button[name=reset]"),
@@ -23,7 +22,7 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
 
 let sounder = new Howl({
    "src": ["assets/Early_twilight.mp3"],
-   "volume": 0.5
+   "volume": 0.4
 });
 
 colon.classList.remove("colon");
@@ -240,14 +239,9 @@ function startTimer(deadline) {
 Push.Permission.request(onGranted, onDenied);
 
 function onGranted() {
-   notify.style.display = "none";
+   console.log("Granted")
 }
 
 function onDenied() {
-   notify.style.display = "none";
+   console.log("Denied")   
 }
-
-document.querySelector(".exit-notif").addEventListener("click", () => {
-   notify.classList.remove("slideInDown");
-   notify.classList.add("slideOutUp");
-})
