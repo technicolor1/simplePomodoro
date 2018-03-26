@@ -3,6 +3,7 @@
 const breakSetter = document.querySelector("#break"),
    colon = document.querySelector(".colon"),
    minuteSpan = document.querySelector(".minutes"),
+   modal = document.querySelector(".control-arm"),
    playpause = document.querySelector("button[name=playresume]"),
    pomoBtn = document.querySelector("button[name=pomodoro]"),
    resetBtn = document.querySelector("button[name=reset]"),
@@ -30,8 +31,6 @@ document.onload = init();
 
 function init() {
    colon.classList.remove("colon");
-   resetBtn.classList.add("hide");
-   playpause.classList.add("hide");
    sessionTimeSet.value = 25;
    breakTimeSet.value = 5;
 }
@@ -260,3 +259,14 @@ function startTimer(deadline) {
    updateClock();
    timeInterval = setInterval(updateClock, 1000);
 }
+
+const cog = document.querySelector("button[name=cog]");
+cog.addEventListener("click", () => {
+   modal.style.display = "block";
+
+   window.onclick = (event) => {
+      if (event.target === modal) {
+         modal.style.display = "none";
+      }
+   }
+})
