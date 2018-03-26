@@ -1,0 +1,120 @@
+/* Main elements */
+
+.reset-control {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-top: 10%;
+}
+
+.main {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: center;
+   -ms-flex-pack: center;
+   justify-content: center;
+   overflow-x: hidden;
+}
+
+#session {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   float: left;
+}
+
+#break {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   float: right;
+}
+
+.clockdiv {
+   position: relative;
+   width: 50%;
+   height: 13em;
+   margin-top: 5%;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: center;
+   -ms-flex-pack: center;
+   justify-content: center;
+   -webkit-box-align: center;
+   -ms-flex-align: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.controllers {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: center;
+   -ms-flex-pack: center;
+   justify-content: center;
+   -webkit-box-align: center;
+   -ms-flex-align: center;
+   align-items: center;
+}
+
+.colon {
+   -webkit-animation: blinker 2.5s linear infinite;
+   animation: blinker 2.5s linear infinite;
+}
+
+.time {
+   -webkit-animation: blinker 1.25s linear infinite;
+   animation: blinker 1.25s linear infinite;
+}
+
+#session, #break {
+   padding-top: 2%;
+}
+
+@-webkit-keyframes blinker {
+   50% {
+      opacity: 0;
+   }
+}
+
+@keyframes blinker {
+   50% {
+      opacity: 0;
+   }
+}
+
+h1 {
+   text-align: center;
+   font-size: 80px;
+   width: 248px;
+   color: var(--nice-white);
+   text-shadow: var(--nice-textshadow);
+}
+
+h2 {
+   padding-top: 70%;
+   text-align: center;
+   font-size: 30px;
+   color: var(--nice-white);
+   text-shadow: var(--nice-textshadow);
+}
+
+.notify {
+   position: absolute;
+   left: 0;
+   right: 0;
+   background-color: var(--nice-white);
+   display: flex;
+   justify-content: center;
+}

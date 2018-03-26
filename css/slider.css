@@ -1,0 +1,105 @@
+/* following 3 blocks hide the default range slider style */
+
+input[type=range] {
+   pointer-events: none;   
+   margin-top: 50%;
+   -webkit-appearance: none;
+   width: 250px;
+   background: transparent;
+   transform: rotate(270deg);
+}
+
+input[type=range]::-webkit-slider-thumb {
+   pointer-events: auto;
+   -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+   outline: none;
+}
+
+/* following blocks deploy a custom slider style */
+
+input[type=range]::-ms-track {
+   width: 100%;
+   cursor: pointer;
+   background: transparent;
+   border-color: transparent;
+   color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   border: 2px solid #000000;
+   height: 2.2rem;
+   width: 2.2rem;
+   border-radius: 50%;
+   background: var(--nice-white);
+   cursor: move;
+   cursor: grab;
+   cursor: -moz-grab;
+   cursor: -webkit-grab;
+   margin-top: -14px;
+   -webkit-transition: all 0.2s ease-in-out;
+   -o-transition: all 0.2s ease-in-out;
+   transition: all 0.2s ease-in-out;
+   -webkit-transform: scale(1.5);
+   -ms-transform: scale(1.5);
+   transform: scale(1.5);
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+   cursor: grabbing;
+   cursor: -moz-grabbing;
+   cursor: -webkit-grabbing;
+}
+
+input[type=range]::-moz-range-thumb {
+   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+   border: 1px solid #000000;
+   height: 36px;
+   width: 16px;
+   border-radius: 3px;
+   background: white;
+   cursor: pointer;
+}
+
+input[type=range]::-ms-thumb {
+   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+   border: 1px solid #000000;
+   height: 36px;
+   width: 16px;
+   border-radius: 3px;
+   background: white;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+   width: 100%;
+   height: 8.4px;
+   cursor: pointer;
+   -webkit-box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+   background: var(--tomato-color);
+   border-radius: 1.3px;
+   border: 0.2px solid #010101;
+}
+
+input[type=range]::-moz-range-track {
+   width: 100%;
+   height: 8.4px;
+   cursor: pointer;
+   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+   background: #3071a9;
+   border-radius: 1.3px;
+   border: 0.2px solid #010101;
+}
+
+input[type=range]::-ms-track {
+   width: 100%;
+   height: 8.4px;
+   cursor: pointer;
+   background: transparent;
+   border-color: transparent;
+   border-width: 16px 0;
+   color: transparent;
+}

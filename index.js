@@ -224,6 +224,10 @@ function startTimer(deadline) {
       secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
 
       if (time.total < 0) {
+         endSession();
+      }
+
+      function endSession() {
          clearInterval(timeInterval);
          if (didBreak === false) {
             if (permitSounds === true) {
