@@ -79,7 +79,7 @@ document.querySelector("button[name=pomodoro]").addEventListener("click", () => 
 
 resetBtn.addEventListener("click", resetSession);
 
-const notifBtn = document.querySelector("button[name=notif");
+const notifBtn = document.querySelector("button[name=notif]");
 notifBtn.addEventListener("click", () => {
    Push.Permission.request(onGranted, onDenied);
 
@@ -91,7 +91,7 @@ notifBtn.addEventListener("click", () => {
    }
 })
 
-const soundBtn = document.querySelector("button[name=sfx");
+const soundBtn = document.querySelector("button[name=sfx]");
 soundBtn.addEventListener("click", () => {
    permitSounds = !permitSounds;
    !permitSounds ? soundBtn.style.color = "red" : soundBtn.style.color = "black";
