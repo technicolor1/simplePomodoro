@@ -56,16 +56,17 @@ function init() {
    })
 
    function listener(ev) {
+      // console.log(ev);
       if (typeof ev === "undefined") {
          return;
       }
       window.requestAnimationFrame(() => {
-         let el = ev.toElement.parentElement.id;
+         let el = ev.target.name;
          document.querySelector("#pomodoro-value").innerHTML = sessionTimeSet.value;
          document.querySelector("#break-value").innerHTML = breakTimeSet.value;
-         if (el === "session") {
+         if (el === "set-pomodoro") {
             minuteSpan.innerHTML = sessionTimeSet.value;
-         } else if (el === "break") {
+         } else if (el === "set-break") {
             minuteSpan.innerHTML = breakTimeSet.value;
          }
       });
