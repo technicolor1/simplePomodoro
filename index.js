@@ -24,7 +24,7 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
 
 let sounder = new Howl({
    "src": ["assets/Early_twilight.mp3"],
-   "volume": 0.4
+   "volume": 0.6
 });
 
 document.onload = init();
@@ -33,6 +33,15 @@ function init() {
    colon.classList.remove("colon");
    sessionTimeSet.value = 25;
    breakTimeSet.value = 5;
+
+   let note = document.querySelector(".permit");
+   if (Push.Permission.has() === false) {
+      note.style.color = "red";
+      note.innerHTML = "Notifications are disabled";
+   } else if (Push.Permission.has() === true) {
+      note.style.color = "red";
+      note.innerHTML = "Notifications are enabled";
+   }
 }
 
 [breakTimeSet, sessionTimeSet].forEach((setter) => {
@@ -230,24 +239,10 @@ function startTimer(deadline) {
       function endSession() {
          clearInterval(timeInterval);
          if (didBreak === false) {
-            if (permitSounds === true) {
-               sounder.play();
-            }
-            if (Push.Permission.has() === true) {
-               Push.create("Break Time!", {
-                  "timeout": 5000
-              });
-            }
+            extras(false);
             startBreak();
          } else if (didBreak === true) {
-            if (permitSounds === true) {
-               sounder.play();
-            }
-            if (Push.Permission.has() === true) {
-               Push.create("Start Working!", {
-                  "timeout": 5000
-              });
-            }
+            extras(true);
             startPomodoro();
          }
       }
@@ -259,6 +254,25 @@ function startTimer(deadline) {
     */
    updateClock();
    timeInterval = setInterval(updateClock, 1000);
+
+   function extras(which) {
+      if (permitSounds === true) {
+         sounder.play();
+      }
+      if (which === false) {
+         if (Push.Permission.has() === true) {
+            Push.create("Break Time!", {
+               "timeout": 5000
+           });
+         }
+      } else if (which === true) {
+         if (Push.Permission.has() === true) {
+            Push.create("Start Working!", {
+               "timeout": 5000
+           });
+         }
+      }
+   }
 }
 
 const cog = document.querySelector("button[name=cog]");

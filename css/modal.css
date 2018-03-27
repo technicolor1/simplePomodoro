@@ -3,7 +3,7 @@
    height: 100vh;
    z-index: 1;
    position: fixed;
-   background-color: rgba(0,0,0,0.4);
+   background-color: rgba(0,0,0,0.5);
 }
 
 .contents {
@@ -19,12 +19,11 @@
    border-radius: 25px;
    width: 50%;
    overflow: auto;
+   padding: 2vw;
 }
 
-.contents > .close {
-   float: right;
-   font-size: 80px;
-   text-align: right;
+.contents > p {
+   text-align: center;
 }
 
 .contents > h4 {
