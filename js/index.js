@@ -10,6 +10,8 @@ const breakSetter = document.querySelector("#break"),
    secondSpan = document.querySelector(".seconds"),
    sessionSetter = document.querySelector("#session");
 
+const workplace = "js/timer.js";
+
 let breakTime = null,
    deadline = null,
    didBreak = false,
@@ -24,8 +26,68 @@ let breakTimeSet = document.querySelector("input[name=set-break]"),
 
 let sounder = new Howl({
    "src": ["assets/Early_twilight.mp3"],
-   "volume": 0.6
+   "volume": 0.5
 });
+
+// Worker
+let worker = null;
+
+// Worker handler
+function workerHandle() {
+   worker.onmessage = (event) => {
+      console.log(event.data);
+      timeRemain = event.data.total;
+
+      displayer(event.data);
+   }
+}
+
+// process worker data to DOM
+function displayer(data) {
+   if (data.hours === 1) {
+      minuteSpan.innerHTML = "60";
+   } else {
+      minuteSpan.innerHTML = (data.minutes);
+   }
+
+   if (data.minutes < 10) {
+      minuteSpan.innerHTML = "0" + minuteSpan.innerHTML;
+   }
+   secondSpan.innerHTML = ("0" + data.seconds).slice(-2);
+
+   if (data.total < 0) {
+      endSession();
+   }
+
+   function endSession() {
+      if (didBreak === false) {
+         extras(false);
+         startBreak();
+      } else if (didBreak === true) {
+         extras(true);
+         startPomodoro();
+      }
+   }
+
+   function extras(which) {
+      if (permitSounds === true) {
+         sounder.play();
+      }
+      if (which === false) {
+         if (Push.Permission.has() === true) {
+            Push.create("Break Time!", {
+               "timeout": 5000
+           });
+         }
+      } else if (which === true) {
+         if (Push.Permission.has() === true) {
+            Push.create("Start Working!", {
+               "timeout": 5000
+           });
+         }
+      }
+   }
+}
 
 document.onload = init();
 
@@ -65,7 +127,6 @@ function init() {
    })
 
    function listener(ev) {
-      // console.log(ev);
       if (typeof ev === "undefined") {
          return;
       }
@@ -113,8 +174,8 @@ playpause.addEventListener("click", () => {
    if (isPaused === false) {
       isPaused = true;
       colon.classList.toggle("colon");
-      clearInterval(timeInterval);
-      timeRemain = timeLeft(deadline).total;
+      worker.terminate();
+
       playpause.innerHTML = "<i class='fas fa-play'></i>";
 
       minuteSpan.classList.toggle("time");
@@ -126,28 +187,20 @@ playpause.addEventListener("click", () => {
       colon.classList.toggle("colon");
       minuteSpan.classList.toggle("time");
       secondSpan.classList.toggle("time");
-      deadline = new Date(Date.parse(new Date()) + timeRemain);
-      startTimer(deadline);
+      worker = new Worker(workplace);
+      worker.postMessage({
+         "pomodoro": (new Date(Date.parse(new Date()) + timeRemain)),
+         "break": null
+      });
+
+      workerHandle();
       playpause.innerHTML = "<i class='fas fa-pause'></i>";
    }
 })
 
-function timeLeft(end) {
-   var total = Date.parse(end) - Date.parse(new Date());
-   var seconds = Math.floor((total / 1000) % 60);
-   var minutes = Math.floor((total / 1000 / 60) % 60);
-   var hours = Math.floor((total / 1000 / 60 / 60) % 60);
-
-   return {
-      "total": total,
-      "minutes": minutes,
-      "seconds": seconds,
-      "hours": hours
-   };
-}
-
 function resetSession() {
-   clearInterval(timeInterval);
+   worker.terminate();
+
    sounder.stop();
    sessionSetter.value = pomodoro;
    breakSetter.value = breakTime;
@@ -200,11 +253,21 @@ function startPomodoro() {
    pomoBtn.classList.add("hide");
 
    pomodoro = sessionTimeSet.value;
-   // pomodoro = 0.01;
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
-   startTimer(deadline);
+
+   if (worker !== null) {
+      worker.terminate();
+
+   }
+   worker = new Worker(workplace);
+   worker.postMessage({
+      "pomodoro": deadline,
+      "break": null
+   });
+
+   workerHandle();
    didBreak = false;
 }
 
@@ -213,66 +276,17 @@ function startBreak() {
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
-   startTimer(deadline);
+
+   worker.terminate();
+
+   worker = new Worker(workplace);
+   worker.postMessage({
+      "pomodoro": null,
+      "break": deadline
+   })
+
+   workerHandle();
    didBreak = true;
-}
-
-function startTimer(deadline) {
-   function updateClock() {
-      let time = timeLeft(deadline);
-
-      if (time.hours === 1) {
-         minuteSpan.innerHTML = "60";
-      } else {
-         minuteSpan.innerHTML = (time.minutes);
-      }
-
-      if (time.minutes < 10) {
-         minuteSpan.innerHTML = "0" + minuteSpan.innerHTML;
-      }
-      secondSpan.innerHTML = ("0" + time.seconds).slice(-2);
-
-      if (time.total < 0) {
-         endSession();
-      }
-
-      function endSession() {
-         clearInterval(timeInterval);
-         if (didBreak === false) {
-            extras(false);
-            startBreak();
-         } else if (didBreak === true) {
-            extras(true);
-            startPomodoro();
-         }
-      }
-   }
-
-   /*
-    * avoid delay
-    * makes clock accurate to millisecond when pause/resume
-    */
-   updateClock();
-   timeInterval = setInterval(updateClock, 1000);
-
-   function extras(which) {
-      if (permitSounds === true) {
-         sounder.play();
-      }
-      if (which === false) {
-         if (Push.Permission.has() === true) {
-            Push.create("Break Time!", {
-               "timeout": 5000
-           });
-         }
-      } else if (which === true) {
-         if (Push.Permission.has() === true) {
-            Push.create("Start Working!", {
-               "timeout": 5000
-           });
-         }
-      }
-   }
 }
 
 const cog = document.querySelector("button[name=cog]");
