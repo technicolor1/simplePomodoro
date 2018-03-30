@@ -15,8 +15,6 @@
 
 // Handle messages
 onmessage = (event) => {
-   console.log(event.data);
-
    if (event.data.pomodoro !== null) {
       startTimer(event.data.pomodoro);
    } else if (event.data.break !== null) {
@@ -47,5 +45,5 @@ function startTimer(deadline) {
 
    // Do not delay in winding up timer
    updateClock();
-   timeInterval = setInterval(updateClock, 1000);
+   setInterval(updateClock, 1000);
 }

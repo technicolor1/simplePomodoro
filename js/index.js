@@ -59,6 +59,12 @@ function displayer(data) {
       endSession();
    }
 
+   if (didBreak === false) {
+      document.title = `Working... ${minuteSpan.innerHTML}:${secondSpan.innerHTML}`;
+   } else if (didBreak === true) {
+      document.title = `Coffee... ${minuteSpan.innerHTML}:${secondSpan.innerHTML}`;
+   }
+
    function endSession() {
       if (didBreak === false) {
          extras(false);
@@ -68,6 +74,8 @@ function displayer(data) {
          startPomodoro();
       }
    }
+
+
 
    function extras(which) {
       if (permitSounds === true) {
@@ -209,6 +217,10 @@ function resetSession() {
    minuteSpan.innerHTML = sessionSetter.value;
    secondSpan.innerHTML = "00";
 
+   if (document.title !== "Pomodoro") {
+      document.title = "Pomodoro";
+   }
+
    colon.classList.remove("colon");
 
    minuteSpan.classList.remove("time");
@@ -253,6 +265,7 @@ function startPomodoro() {
    pomoBtn.classList.add("hide");
 
    pomodoro = sessionTimeSet.value;
+   // pomodoro = timeBug(true);
    minuteSpan.innerHTML = (pomodoro);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (pomodoro * 60 * 1000));
@@ -273,6 +286,7 @@ function startPomodoro() {
 
 function startBreak() {
    breakTime = breakTimeSet.value;
+   // breakTime = timeBug(false);
    minuteSpan.innerHTML = (breakTime);
    secondSpan.innerHTML = ("00");
    deadline = new Date(Date.parse(new Date()) + (breakTime * 60 * 1000));
@@ -299,3 +313,11 @@ cog.addEventListener("click", () => {
       }
    }
 })
+
+function timeBug(which) {
+   if (which) {
+      return 0.1;
+   } else {
+      return 0.5;
+   }
+}
