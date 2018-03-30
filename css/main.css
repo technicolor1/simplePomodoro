@@ -68,7 +68,7 @@
 
 .colon {
    -webkit-animation: blinker 2.5s linear infinite;
-   animation: blinker 2.5s linear infinite;
+   animation: blinker 2s linear infinite;
 }
 
 .time {
@@ -94,8 +94,8 @@
 
 h1 {
    text-align: center;
-   font-size: 80px;
-   width: 248px;
+   font-size: 100px;
+   width: 40vw;
    color: var(--nice-white);
    text-shadow: var(--nice-textshadow);
 }
