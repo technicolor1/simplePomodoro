@@ -76,7 +76,6 @@ function displayer(data) {
    }
 
 
-
    function extras(which) {
       if (permitSounds === true) {
          sounder.play();

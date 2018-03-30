@@ -4,7 +4,7 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   padding-top: 10%;
+   width: 100vw;
 }
 
 .main {
@@ -42,8 +42,6 @@
 .clockdiv {
    position: relative;
    width: 50%;
-   height: 13em;
-   margin-top: 5%;
    display: -webkit-box;
    display: -ms-flexbox;
    display: flex;
